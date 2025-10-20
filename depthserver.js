@@ -4,8 +4,8 @@ import fs from "fs";
 import WebSocket, { WebSocketServer } from "ws";
 
 const server = https.createServer({
-  cert: fs.readFileSync("/etc/letsencrypt/live/koppelow.com/fullchain.pem"),
-  key: fs.readFileSync("/etc/letsencrypt/live/koppelow.com/privkey.pem")
+  key: fs.readFileSync('/etc/letsencrypt/live/koppelow.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/koppelow.com/fullchain.pem'),
 });
 
 const wss = new WebSocketServer({ server, path: "/depthmanager" });
