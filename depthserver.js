@@ -20,6 +20,6 @@ wss.on("connection", ws => {
   });
 });
 
-server.listen(9999, () => {
+server.listen(3006, () => {
   console.log("✅ Secure WSS server running on port 9999");
 });
