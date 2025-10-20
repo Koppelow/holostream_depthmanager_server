@@ -1,6 +1,6 @@
-import fs from "fs";
-import https from "https";
-import WebSocket from "ws";
+const fs = require("fs");
+const https = require("https");
+const WebSocket = require("ws");
 
 const server = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/koppelow.com/privkey.pem'),

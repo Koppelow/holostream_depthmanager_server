@@ -24,7 +24,7 @@
     const sendBtn = document.getElementById('sendBtn');
 
     // Change to your server domain and port
-    const ws = new WebSocket('wss://koppelow.com:3006/depthmanager');
+    const ws = new WebSocket('wss://koppelow.com/depthmanager');
 
     ws.onopen = () => {
       appendMessage('✅ Connected to server');
