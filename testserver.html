@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DepthManager WSS Test</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    #messages { border: 1px solid #ccc; height: 200px; overflow-y: auto; padding: 0.5rem; }
+    input { width: 300px; }
+    button { margin-left: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>DepthManager WSS Test</h1>
+
+  <div id="messages"></div>
+
+  <input id="msgInput" type="text" placeholder="Type a message..." />
+  <button id="sendBtn">Send</button>
+
+  <script>
+    const messagesDiv = document.getElementById('messages');
+    const input = document.getElementById('msgInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    // Change to your server domain and port
+    const ws = new WebSocket('wss://koppelow.com:3006/depthmanager');
+
+    ws.onopen = () => {
+      appendMessage('✅ Connected to server');
+    };
+
+    ws.onmessage = (event) => {
+      appendMessage('📨 ' + event.data);
+    };
+
+    ws.onclose = () => {
+      appendMessage('❌ Disconnected from server');
+    };
+
+    ws.onerror = (err) => {
+      appendMessage('⚠️ Error: ' + err.message);
+    };
+
+    sendBtn.onclick = () => {
+      const msg = input.value;
+      if (!msg) return;
+      ws.send(msg);
+      appendMessage('📝 You: ' + msg);
+      input.value = '';
+    };
+
+    function appendMessage(msg) {
+      const p = document.createElement('p');
+      p.textContent = msg;
+      messagesDiv.appendChild(p);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+  </script>
+</body>
+</html>
